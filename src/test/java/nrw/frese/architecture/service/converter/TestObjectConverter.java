@@ -10,7 +10,7 @@ public class TestObjectConverter implements ObjectConverter<TestObject, DbTestOb
         if (dbEntity != null) {
             TestObject testObject = new TestObject();
             testObject.setId(dbEntity.getId());
-            testObject.setName(dbEntity.getDb_name());
+            testObject.setName(dbEntity.getName());
             return testObject;
         }
         return null;
@@ -20,7 +20,7 @@ public class TestObjectConverter implements ObjectConverter<TestObject, DbTestOb
     public DbTestObject convertToDb(TestObject dtoEntity) {
         DbTestObject dbTestObject = new DbTestObject();
         dbTestObject.setId(dtoEntity.getId());
-        dbTestObject.setDb_name(dtoEntity.getName());
+        dbTestObject.setName(dtoEntity.getName());
         return dbTestObject;
     }
 }
