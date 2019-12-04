@@ -1,6 +1,7 @@
 package nrw.frese.architecture.service.converter;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import nrw.frese.architecture.model.KeyedObject;
 
 import java.lang.reflect.Field;
@@ -11,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 public abstract class BaseAutoConverter<DTO extends KeyedObject<ID>, DB extends KeyedObject<ID>, ID> implements ObjectConverter<DTO, DB, ID> {
 
     protected abstract DTO getNewDtoObject();
@@ -56,13 +58,12 @@ public abstract class BaseAutoConverter<DTO extends KeyedObject<ID>, DB extends 
                         try {
                             setMethod.invoke(targetObject, getMethod.invoke(sourceObject));
                         } catch (IllegalAccessException | InvocationTargetException e) {
-                            System.out.println(String.format("An exception occurred during auto-converting object of type %s to %s. Exception: %s - %s", sourceObject.getClass().getName(), targetObject.getClass().getName(), e.getClass().getName(), e.getLocalizedMessage()));
+                            log.error(String.format("An exception occurred during auto-converting object of type %s to %s - %s", sourceObject.getClass().getName(), targetObject.getClass().getName(), e.getLocalizedMessage()), e);
                         }
                     }
                 } else {
-                    //TODO Proper logging or exception
-                    System.out.println(String.format("No matching field could be found on type %s for the field %s of type %s contained in %s.",
-                            targetObject.getClass().getName(), dbField.getName(), dbField.getType().getName(), sourceObject.getClass().getName()));
+                    log.warn("No matching field could be found on type {} for the field {} of type {} contained in {}.",
+                            targetObject.getClass().getName(), dbField.getName(), dbField.getType().getName(), sourceObject.getClass().getName());
                 }
             }
         }
@@ -105,7 +106,7 @@ public abstract class BaseAutoConverter<DTO extends KeyedObject<ID>, DB extends 
         }
 
         if (method == null) {
-            System.out.println(String.format("The method %s could not be found on type %s", getMethodName(field, methodType), fieldClass.getName()));
+           log.warn("The method {} could not be found on type {}", getMethodName(field, methodType), fieldClass.getName());
         }
 
         return method;

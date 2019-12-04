@@ -1,9 +1,9 @@
 package nrw.frese.architecture.service;
 
-import nrw.frese.architecture.base.CrudInterface;
-import nrw.frese.architecture.data.DataAccessObject;
+import nrw.frese.architecture.data.DataRepository;
 import nrw.frese.architecture.model.KeyedObject;
 import nrw.frese.architecture.service.converter.ObjectConverter;
+import nrw.frese.architecture.base.CrudInterface;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ public interface ConverterService<DTO extends KeyedObject<ID>, DB extends KeyedO
 
     ObjectConverter<DTO, DB, ID> getConverter();
 
-    DataAccessObject<DB, ID> getDataAccessObject();
+    DataRepository<DB, ID> getDataAccessObject();
 
     @Override
     public default DTO add(DTO entity) {

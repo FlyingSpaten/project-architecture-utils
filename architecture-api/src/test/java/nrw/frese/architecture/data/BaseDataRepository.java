@@ -1,13 +1,12 @@
 package nrw.frese.architecture.data;
 
 import nrw.frese.architecture.model.KeyedObject;
-import nrw.frese.architecture.model.TestObject;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class BaseDataAccessObject<T extends KeyedObject<Long>> implements DataAccessObject<T, Long> {
+public abstract class BaseDataRepository<T extends KeyedObject<Long>> implements DataRepository<T, Long> {
 
     private static long id = 1;
 

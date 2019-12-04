@@ -1,7 +1,7 @@
 package nrw.frese.architecture.service;
 
-import nrw.frese.architecture.base.CrudInterface;
 import nrw.frese.architecture.model.TestObject;
+import nrw.frese.architecture.base.CrudInterface;
 import org.junit.BeforeClass;
 
 public class TestConverterService extends BaseCrudElementTest<TestObject> {

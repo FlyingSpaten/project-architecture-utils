@@ -1,14 +1,14 @@
 package nrw.frese.architecture.service;
 
 import nrw.frese.architecture.base.CrudInterface;
-import nrw.frese.architecture.data.DataAccessObject;
+import nrw.frese.architecture.data.DataRepository;
 import nrw.frese.architecture.model.KeyedObject;
 
 import java.util.List;
 
 public interface SingleObjectServiceService<T extends KeyedObject<ID>, ID> extends CrudInterface<T, ID> {
 
-    DataAccessObject<T, ID> getDataAccessObject();
+    DataRepository<T, ID> getDataAccessObject();
 
     @Override
     public default T add(T entity) {

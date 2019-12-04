@@ -2,18 +2,18 @@ package nrw.frese.architecture.data;
 
 import lombok.Getter;
 import lombok.Setter;
-import nrw.frese.architecture.model.TestObject;
+import nrw.frese.architecture.model.DbTestObject;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestObjectAccessObject extends BaseDataAccessObject<TestObject> {
+public class DbTestObjectRepository extends BaseDataRepository<DbTestObject> {
 
     @Getter
     @Setter
-    private List<TestObject> objectList;
+    private List<DbTestObject> objectList;
 
-    public TestObjectAccessObject() {
+    public DbTestObjectRepository() {
         objectList = new LinkedList<>();
     }
 

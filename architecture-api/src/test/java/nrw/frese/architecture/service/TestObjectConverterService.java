@@ -1,7 +1,7 @@
 package nrw.frese.architecture.service;
 
-import nrw.frese.architecture.data.DataAccessObject;
-import nrw.frese.architecture.data.DbTestObjectAccessObject;
+import nrw.frese.architecture.data.DataRepository;
+import nrw.frese.architecture.data.DbTestObjectRepository;
 import nrw.frese.architecture.model.DbTestObject;
 import nrw.frese.architecture.model.TestObject;
 import nrw.frese.architecture.service.converter.ObjectConverter;
@@ -9,10 +9,10 @@ import nrw.frese.architecture.service.converter.TestObjectConverter;
 
 public class TestObjectConverterService implements ConverterService<TestObject, DbTestObject, Long> {
 
-    private DbTestObjectAccessObject dbTestObjectAccessObject;
+    private DbTestObjectRepository dbTestObjectAccessObject;
 
     public TestObjectConverterService(){
-        dbTestObjectAccessObject = new DbTestObjectAccessObject();
+        dbTestObjectAccessObject = new DbTestObjectRepository();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class TestObjectConverterService implements ConverterService<TestObject, 
     }
 
     @Override
-    public DataAccessObject<DbTestObject, Long> getDataAccessObject() {
+    public DataRepository<DbTestObject, Long> getDataAccessObject() {
         return dbTestObjectAccessObject;
     }
 }
