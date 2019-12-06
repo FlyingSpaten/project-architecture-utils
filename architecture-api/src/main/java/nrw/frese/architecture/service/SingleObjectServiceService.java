@@ -31,8 +31,8 @@ public interface SingleObjectServiceService<T extends KeyedObject<ID>, ID> exten
     }
 
     @Override
-    public default void delete(ID id) {
-        getDataAccessObject().delete(id);
+    public default void deleteById(ID id) {
+        getDataAccessObject().deleteById(id);
     }
 
     @Override

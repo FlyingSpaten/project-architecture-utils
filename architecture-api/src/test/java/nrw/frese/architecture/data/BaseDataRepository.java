@@ -45,7 +45,7 @@ public abstract class BaseDataRepository<T extends KeyedObject<Long>> implements
     }
 
     @Override
-    public void delete(Long aLong) {
+    public void deleteById(Long aLong) {
         setObjectList(getObjectList().stream().filter(testObject -> !testObject.getId().equals(aLong)).collect(Collectors.toList()));
     }
 

@@ -14,7 +14,7 @@ public interface CrudInterface<T extends KeyedObject<ID>, ID> {
 
     public List<T> getAll();
 
-    public void delete(ID id);
+    public void deleteById(ID id);
 
     public void delete(T entity);
 

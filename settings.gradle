@@ -1,3 +1,4 @@
 rootProject.name = 'project-architecture-utils'
 include 'architecture-api'
+include 'spring-integration'
 

@@ -35,8 +35,8 @@ public interface ConverterService<DTO extends KeyedObject<ID>, DB extends KeyedO
     }
 
     @Override
-    public default void delete(ID id) {
-        getDataAccessObject().delete(id);
+    public default void deleteById(ID id) {
+        getDataAccessObject().deleteById(id);
     }
 
     @Override

@@ -46,7 +46,7 @@ public abstract class BaseCrudElementTest<T extends KeyedObject<Long>> {
     public void testDeleteById() {
         T object = getCrudElement().add(getNewObject());
         assert getCrudElement().get(object.getId()).equals(object);
-        getCrudElement().delete(object.getId());
+        getCrudElement().deleteById(object.getId());
         assert getCrudElement().get(object.getId()) == null;
     }
 
