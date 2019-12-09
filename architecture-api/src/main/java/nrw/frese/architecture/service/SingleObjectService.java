@@ -6,7 +6,7 @@ import nrw.frese.architecture.model.KeyedObject;
 
 import java.util.List;
 
-public interface SingleObjectServiceService<T extends KeyedObject<ID>, ID> extends CrudInterface<T, ID> {
+public interface SingleObjectService<T extends KeyedObject<ID>, ID> extends CrudInterface<T, ID> {
 
     DataRepository<T, ID> getDataAccessObject();
 

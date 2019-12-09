@@ -4,7 +4,7 @@ import nrw.frese.architecture.data.TestObjectRepository;
 import nrw.frese.architecture.model.TestObject;
 import nrw.frese.architecture.data.DataRepository;
 
-public class TestObjectService implements SingleObjectServiceService<TestObject, Long> {
+public class TestObjectService implements SingleObjectService<TestObject, Long> {
 
     private TestObjectRepository testObjectAccessObject;
 
