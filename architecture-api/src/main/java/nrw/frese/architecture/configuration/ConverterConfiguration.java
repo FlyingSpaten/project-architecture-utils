@@ -20,14 +20,14 @@ public class ConverterConfiguration {
         return me;
     }
 
-    private Map<Class<? extends KeyedObject<?>>, ObjectConverter<? extends KeyedObject<?>, ? extends KeyedObject<?>, ?>> resolvedConverters;
+    private Map<Class<? extends KeyedObject<?>>, ObjectConverter<? extends KeyedObject<?>, ? extends KeyedObject<?>, ?>> resolvedTransitionObjectConverters;
 
-    private List<ObjectConverter<? extends KeyedObject<?>, ? extends KeyedObject<?>, ?>> unresolvedConverters;
+    private List<ObjectConverter<? extends KeyedObject<?>, ? extends KeyedObject<?>, ?>> unresolvedTransitionObjectConverters;
 
     @SuppressWarnings("rawtypes")
     private ConverterConfiguration(String... basePackages) {
-        resolvedConverters = new HashMap<>();
-        unresolvedConverters = new LinkedList<>();
+        resolvedTransitionObjectConverters = new HashMap<>();
+        unresolvedTransitionObjectConverters = new LinkedList<>();
 
         for (String basePackage : basePackages) {
             Reflections reflections = new Reflections(basePackage);
@@ -39,18 +39,14 @@ public class ConverterConfiguration {
                 } catch (Exception e) {
                     throw new ConverterInitializationException(converterClass, e);
                 }
-                if (converter != null) {
-                    Class<? extends KeyedObject<?>> transitionObjectClass = resolveConverterTransitObject(converterClass);
-                    if (transitionObjectClass != null) {
-                        if (resolvedConverters.get(transitionObjectClass) != null) {
-                            throw new DuplicatedConverterException(transitionObjectClass, converterClass, resolvedConverters.get(transitionObjectClass).getClass());
-                        }
-                        resolvedConverters.put(transitionObjectClass, converter);
-                    } else {
-                        unresolvedConverters.add(converter);
+                Class<? extends KeyedObject<?>> transitionObjectClass = resolveConverterTransitObject(converterClass);
+                if (transitionObjectClass != null) {
+                    if (resolvedTransitionObjectConverters.get(transitionObjectClass) != null) {
+                        throw new DuplicatedConverterException(transitionObjectClass, converterClass, resolvedTransitionObjectConverters.get(transitionObjectClass).getClass());
                     }
+                    resolvedTransitionObjectConverters.put(transitionObjectClass, converter);
                 } else {
-                    throw new ConverterInitializationException(converterClass);
+                    unresolvedTransitionObjectConverters.add(converter);
                 }
             }
         }
@@ -61,7 +57,12 @@ public class ConverterConfiguration {
         return converterClass.getConstructor().newInstance();
     }
 
+    @SuppressWarnings("rawtypes")
     private Class<? extends KeyedObject<?>> resolveConverterTransitObject(Class<? extends ObjectConverter> converterClass) {
+        Converter converter =  converterClass.getAnnotation(Converter.class);
+        if(converter != null){
+            return converter.dtoType();
+        }
         return null;
     }
 
